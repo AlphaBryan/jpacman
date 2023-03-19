@@ -10,7 +10,7 @@ import nl.tudelft.jpacman.sprite.Sprite;
 /**
  * A player operated unit in our game.
  *
- * @author Jeroen Roosen 
+ * @author Jeroen Roosen
  */
 public class Player extends Unit {
 
@@ -38,21 +38,37 @@ public class Player extends Unit {
      * {@link Unit} iff this player died by collision, <code>null</code> otherwise.
      */
     private Unit killer;
+    /**
+     * Number of lives that the player have.
+     */
+    private int lives;
 
     /**
      * Creates a new player with a score of 0 points.
      *
      * @param spriteMap
-     *            A map containing a sprite for this player for every direction.
+     *                       A map containing a sprite for this player for every
+     *                       direction.
      * @param deathAnimation
-     *            The sprite to be shown when this player dies.
+     *                       The sprite to be shown when this player dies.
      */
     protected Player(Map<Direction, Sprite> spriteMap, AnimatedSprite deathAnimation) {
         this.score = 0;
+        this.lives = 3;
         this.alive = true;
         this.sprites = spriteMap;
         this.deathSprite = deathAnimation;
         deathSprite.setAnimating(false);
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void reduceLive() {
+        if (lives > 0) {
+            lives--;
+        }
     }
 
     /**
@@ -70,7 +86,7 @@ public class Player extends Unit {
      * If the player comes back alive, the {@link killer} will be reset.
      *
      * @param isAlive
-     *            <code>true</code> iff this player is alive.
+     *                <code>true</code> iff this player is alive.
      */
     public void setAlive(boolean isAlive) {
         if (isAlive) {
@@ -86,7 +102,8 @@ public class Player extends Unit {
     /**
      * Returns the unit that caused the death of Pac-Man.
      *
-     * @return <code>Unit</code> iff the player died by collision, otherwise <code>null</code>.
+     * @return <code>Unit</code> iff the player died by collision, otherwise
+     *         <code>null</code>.
      */
     public Unit getKiller() {
         return killer;
@@ -98,7 +115,7 @@ public class Player extends Unit {
      * @param killer is set if collision with ghost happens.
      */
     public void setKiller(Unit killer) {
-        this.killer =  killer;
+        this.killer = killer;
     }
 
     /**
@@ -122,8 +139,8 @@ public class Player extends Unit {
      * Adds points to the score of this player.
      *
      * @param points
-     *            The amount of points to add to the points this player already
-     *            has.
+     *               The amount of points to add to the points this player already
+     *               has.
      */
     public void addPoints(int points) {
         score += points;
