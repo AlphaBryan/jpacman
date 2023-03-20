@@ -27,7 +27,10 @@ public class ScorePanel extends JPanel {
     /**
      * The map of players and the labels their scores are on.
      */
+    // make scoreLabels transient to avoid serialization issues
     private final Map<Player, JLabel> scoreLabels;
+
+    
 
     /**
      * The default way in which the score is shown.
@@ -49,6 +52,9 @@ public class ScorePanel extends JPanel {
     public ScorePanel(List<Player> players) {
         super();
         assert players != null;
+        if (players.isEmpty() || players.contains(null)) {
+            throw new IllegalArgumentException("At least one player is required.");
+        }
 
         setLayout(new GridLayout(2, players.size()));
 
@@ -99,7 +105,9 @@ public class ScorePanel extends JPanel {
      * @param scoreFormatter Score formatter to be used.
      */
     public void setScoreFormatter(ScoreFormatter scoreFormatter) {
-        assert scoreFormatter != null;
+        if (scoreFormatter == null) {
+            throw new IllegalArgumentException("Score formatter cannot be null.");
+        }
         this.scoreFormatter = scoreFormatter;
     }
 }

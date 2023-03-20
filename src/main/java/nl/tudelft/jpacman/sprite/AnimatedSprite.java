@@ -93,6 +93,7 @@ public class AnimatedSprite implements Sprite {
             result = animationFrames[current];
         }
         assert result != null;
+        
         return result;
     }
 

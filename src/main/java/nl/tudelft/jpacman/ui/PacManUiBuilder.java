@@ -78,7 +78,10 @@ public class PacManUiBuilder {
      *            The game to stop.
      */
     private void addStopButton(final Game game) {
-        assert game != null;
+        // assert game != null;
+        if (game == null) {
+            throw new IllegalArgumentException("Game cannot be null.");
+        }
 
         buttons.put(STOP_CAPTION, game::stop);
     }
@@ -91,8 +94,10 @@ public class PacManUiBuilder {
      *            The game to start.
      */
     private void addStartButton(final Game game) {
-        assert game != null;
-
+        // assert game != null;
+        if (game == null) {
+            throw new IllegalArgumentException("Game cannot be null.");
+        }
         buttons.put(START_CAPTION, game::start);
     }
 
